@@ -1,0 +1,64 @@
+<template>
+  <div class="to-do-item" :class="{ completed: todo.completed }">
+    <span>{{ todo.title }}</span>
+    <div class="controls">
+      <span @click="deleteItem">🗑</span>
+      <span @click="completeItem">✓</span>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    todo: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
+  },
+  methods: {
+    completeItem() {
+      this.$services.todo.complete(this.todo).then(() => this.todo.completed = !this.todo.completed)
+    },
+    deleteItem() {
+      this.$services.todo.delete(this.todo.id).then(() => this.$emit('delete', this.todo))
+    }
+  }
+}
+</script>
+<style>
+.to-do-item {
+  width: 100%;
+  display: block;
+  height: 50px
+}
+
+.to-do-item.completed {
+  opacity: 0.2;
+}
+.to-do-item span {
+  height: 50px;
+  padding-left: 20px;
+  line-height: 50px;
+  width: 300px;
+  display: inline-block;
+}
+
+.to-do-item .controls {
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  float: right;
+}
+.to-do-item .controls span {
+  line-height: 50px;
+  height: 50px;
+  display: inline-block;
+  width: 45px;
+  text-align: center;
+  padding: 0;
+  cursor: pointer;
+}
+</style>
