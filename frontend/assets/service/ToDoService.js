@@ -28,7 +28,7 @@ export default class ToDoApi {
         completed: false,
       },
       withCredentials: true,
-    }).then((r) => r.data);
+    }).then((r) => new ToDo(r.data.id, r.data.title, r.data.completed));
   }
 
   complete(todo) {
@@ -41,7 +41,7 @@ export default class ToDoApi {
         completed: !todo.completed,
       },
       withCredentials: true,
-    }).then((r) => r.data);
+    }).then((r) => new ToDo(r.data.id, r.data.title, r.data.completed));
   }
 
   delete(id) {

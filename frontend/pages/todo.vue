@@ -17,7 +17,10 @@ export default {
   data () {
     return {
       todos: {
-        type: Array
+        type: Array,
+        default() {
+          return []
+        }
       }
     }
   },
