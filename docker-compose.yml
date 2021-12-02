@@ -1,9 +1,21 @@
 version: '3'
 services:
-  todo-web-db:
+  todo-db:
     image: mongo:latest
     environment:
       MONGO_INITDB_DATABASE: todo-web
     ports:
-      - 27017:27017
-    command: mongod
+      - 27017:27017  
+  spring-todo-frontend:
+    image: spring-todo-frontend:latest
+    environment:
+      PORT: 3000
+      PROXY_API: http://spring-todo-backend:8080/
+    ports:
+      - 3000:3000
+  spring-todo-backend:
+    image: spring-todo-backend:latest
+    environment:
+      MONGODB_URI: mongodb://todo-db:27017/todo-web
+    ports:
+      - 8080:8080

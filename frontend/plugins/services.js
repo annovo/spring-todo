@@ -1,10 +1,10 @@
 import ToDoService from "../assets/service/ToDoService";
 import LoginService from "../assets/service/LoginService";
 
-export default (ctx, inject) => {
+export default ({ $axios }, inject) => {
   const services = {
-    todo: new ToDoService(ctx.$axios),
-    login: new LoginService(ctx.$axios),
+    todo: new ToDoService($axios),
+    login: new LoginService($axios),
   };
 
   inject("services", services);
