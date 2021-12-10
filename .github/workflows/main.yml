@@ -39,12 +39,13 @@ jobs:
       - uses: gradle/gradle-build-action@v2
         with:
           build-root-directory: ./backend
-
       - name: Docker login
         run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 
       - name: Docker Build and push
         run: |
+          ls backend
+          ls backend/build 
           docker build --file=backend/backend.dockerfile --rm=true -t registry.heroku.com/$APP_NAME_BACKEND/web .
           docker push registry.heroku.com/$APP_NAME_BACKEND/web
 
