@@ -2,6 +2,8 @@
 # That is why we tell node here to use the openjdk image with java 12 as base.
 FROM openjdk:11
 
+ARG JAR_FILE=backend/build/libs/todo-0.0.1-SNAPSHOT.jar
+
 # Create an application directory
 RUN mkdir -p /app
 
@@ -9,7 +11,7 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # Copy or project directory (locally) in the current directory of our docker image (/app)
-COPY backend/build/libs/*.jar ./app.jar
+COPY ${JAR_FILE} ./app.jar
 
 # Expose $PORT on container.
 # We use a varibale here as the port is something that can differ on the environment.
