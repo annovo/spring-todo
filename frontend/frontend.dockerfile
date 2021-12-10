@@ -1,6 +1,6 @@
 # We don't want to start from scratch.
 # That is why we tell node here to use the current node image as base.
-FROM node:12.16.2
+FROM node:alpine3.11
 
 # Create an application directory
 RUN mkdir -p /app

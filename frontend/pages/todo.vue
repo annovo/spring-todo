@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title">
-      My To Do List
+      I need to do my To Do:
     </h1>
     <to-do-list :todos = "todos"/>
   </div>
