@@ -1,4 +1,6 @@
 <template>
+<div>
+  <loading :visible="isVisible"/>
   <form @submit.prevent="performLogin" action="post">
       <p>
         <input
@@ -25,24 +27,35 @@
         Sign in
       </button>
     </form>
+</div>
 </template>
 
 <script>
+import Loading from './Loading.vue'
+
 export default {
+  components: {
+    Loading
+  },
   data () {
     return {
+      isVisible: false,
       username: '',
       password: ''
     }
   },
   methods: {
     async performLogin () {
+      console.log(this.isVisible)
+      this.isVisible = true
+      //setTimeout(() => this.isVisible = false, 5000);
       if (await this.$services.login.performLogin(this.username, this.password)) {
         this.$router.push('todo')
       } else {
         this.username = ''
         this.password = ''
       }
+      this.isVisible = false
     }
   }
 }
